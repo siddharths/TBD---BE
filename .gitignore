@@ -7,8 +7,7 @@ bin
 build
 build/libs
 build/tmp
-src/main/resources/db.properties
-src/main/resources/log4j.properties
 build
 build/libs
 build/tmp
+src/main/resources/application.properties
