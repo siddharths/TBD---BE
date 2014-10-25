@@ -7,8 +7,6 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.8.RELEASE")
-		
-		classpath 'com.bmuschko:gradle-tomcat-plugin:2.0'		
     }
 }
 
@@ -17,7 +15,6 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
-apply plugin: 'com.bmuschko.tomcat'
 
 jar {
     baseName = 'gs-accessing-data-rest'
@@ -31,62 +28,15 @@ repositories {
 }
 
 dependencies {
-
-	def tomcatVersion = '7.0.11'
-	tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-		   "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
-	tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
-		exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
-	}
 	
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	
     compile('org.hibernate:hibernate-entitymanager:4.3.6.Final')
-	
-	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.1'
-	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.1'
-	compile 'org.slf4j:slf4j-api:1.7.7'
-	compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.1' 
-	
 	compile 'mysql:mysql-connector-java:5.1.33'
 	
-	compile 'commons-configuration:commons-configuration:1.10'
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.1'
 }
-
-tomcat {
-	httpPort = 8090
-	httpsPort = 8091
-	enableSSL = false
-}
-
-task tomcatDebug {
-	// Create a new task tomcatDebug, add a description and add it to the same group as tomcatRun
-	description "Starting Tomcat with debugger enabled on port 5008."
-	group "web application"
- } << {
-  
-	org.gradle.tooling.ProjectConnection conn = org.gradle.tooling.GradleConnector.newConnector()
-	   .forProjectDirectory(new File("."))
-	   .connect();
-  
-	try {
-  
-	   org.gradle.tooling.model.build.BuildEnvironment env = conn.getModel(org.gradle.tooling.model.build.BuildEnvironment.class)
-	   org.gradle.tooling.BuildLauncher build = conn.newBuild();
-   
-	   build.forTasks("tomcatRun")
-	   // Enable debug via jvm arguments and append JVM arguments of the currently running vm (except -D).
-	   build.setJvmArguments("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5008", *env.java.jvmArguments)
-  
-	   // Run tomcatRun in the new JVM with debug parameters
-	   build.run()
-  
-	} finally {
-	   conn.close();
-	}
- }
