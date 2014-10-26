@@ -34,6 +34,6 @@ Take a look at the response headers. Go ahead, I will wait. The `Location` respo
 Simple. `http://localhost:8081/user/{id}`
 
 #### Fetch user by username.
-Very simple. `http://localhost:8081/user/search/findByUserName?un={userNameGoesHereWithoutTheBracesObviously}`
+Very simple. `http://localhost:8081/user/un/{userNameGoesHereWithoutTheBracesObviously}`
 
 
