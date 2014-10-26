@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 import org.watchdog.domain.User;
 import org.watchdog.domain.UserType;
 
@@ -17,13 +17,11 @@ import org.watchdog.domain.UserType;
  * @author Vivek Ranjan
  *
  */
-@RepositoryRestResource(collectionResourceRel = "user", path = "user")
+@Repository
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find user by username.
-	 * <p>
-	 * Path: /user/search/findByUserName?un={userName}
 	 * 
 	 * @param un
 	 *            The username to search for.
@@ -35,8 +33,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find user by their phone number.
-	 * <p>
-	 * Path: /user/search/findByPhoneNumber?pn={phoneNumber}
 	 * 
 	 * @param pn
 	 *            The phone number to search for.
@@ -48,8 +44,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find users by their email. Not all users will have an email.
-	 * <p>
-	 * Path: /user/search/findByEmailAddress?email={emailAddress}
 	 * 
 	 * @param email
 	 *            The email to search for.
@@ -61,8 +55,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find all users by a particular type.
-	 * <p>
-	 * Path: /user/search/findByUserType?type={userType}
 	 * 
 	 * @param type
 	 *            The {@link UserType} to search for.
