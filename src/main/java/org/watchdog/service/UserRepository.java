@@ -22,6 +22,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find user by username.
+	 * <p>
+	 * Path: /user/search/findByUserName?un={userName}
 	 * 
 	 * @param un
 	 *            The username to search for.
@@ -33,6 +35,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find user by their phone number.
+	 * <p>
+	 * Path: /user/search/findByPhoneNumber?pn={phoneNumber}
 	 * 
 	 * @param pn
 	 *            The phone number to search for.
@@ -44,6 +48,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find users by their email. Not all users will have an email.
+	 * <p>
+	 * Path: /user/search/findByEmailAddress?email={emailAddress}
 	 * 
 	 * @param email
 	 *            The email to search for.
@@ -55,6 +61,8 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 	/**
 	 * Find all users by a particular type.
+	 * <p>
+	 * Path: /user/search/findByUserType?type={userType}
 	 * 
 	 * @param type
 	 *            The {@link UserType} to search for.
