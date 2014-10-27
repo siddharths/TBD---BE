@@ -1,13 +1,10 @@
 buildscript {
-    repositories {
-        maven { url "http://repo.spring.io/libs-release" }
-        mavenLocal()
-        mavenCentral()
-		jcenter()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.8.RELEASE")
-    }
+	repositories {
+		maven { url "http://repo.spring.io/libs-release" }
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.8.RELEASE") }
 }
 
 apply plugin: 'java'
@@ -17,26 +14,26 @@ apply plugin: 'spring-boot'
 apply plugin: 'war'
 
 jar {
-    baseName = 'gs-accessing-data-rest'
-    version = '0.1.0'
+	baseName = 'gs-accessing-data-rest'
+	version = '0.1.0'
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "http://repo.spring.io/libs-release" }
+	mavenLocal()
+	mavenCentral()
+	maven { url "http://repo.spring.io/libs-release" }
+	jcenter()
 }
 
 dependencies {
-	
-    compile("org.springframework.boot:spring-boot-starter-data-rest")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	
-    compile('org.hibernate:hibernate-entitymanager:4.3.6.Final')
+
+	compile("org.springframework.boot:spring-boot-starter-data-rest")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	compile "com.mangofactory:swagger-springmvc:0.9.0"
+
+	compile('org.hibernate:hibernate-entitymanager:4.3.6.Final')
 	compile 'mysql:mysql-connector-java:5.1.33'
-	
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
-}
+task wrapper(type: Wrapper) { gradleVersion = '2.1' }

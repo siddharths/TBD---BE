@@ -11,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.wordnik.swagger.annotations.ApiModel;
+import com.wordnik.swagger.annotations.ApiModelProperty;
+
 /**
  * A typical user in the system.
  * 
@@ -18,28 +21,35 @@ import javax.persistence.Table;
  *
  */
 @Entity
+@ApiModel("User")
 @Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "user_id")
+	@ApiModelProperty(dataType = "string", required = false)
 	private Long userId;
 
 	@Column(name = "user_name", nullable = false, unique = true)
+	@ApiModelProperty(required = true, dataType = "string")
 	private String userName;
 
 	@Column(name = "password")
+	@ApiModelProperty(required = false, dataType = "string")
 	private String password;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "user_type")
+	@ApiModelProperty(required = false, dataType = "string", allowableValues = "STUDENT, SUPERUSER, TEACHER, GUARDIAN")
 	private UserType userType;
 
 	@Column(name = "email_address", nullable = true, unique = true)
+	@ApiModelProperty(required = true, dataType = "string")
 	private String emailAddress;
 
 	@Column(name = "phone_number", nullable = false, unique = true)
+	@ApiModelProperty(required = true, dataType = "string")
 	private String phoneNumber;
 
 	/**

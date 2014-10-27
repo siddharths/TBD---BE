@@ -19,7 +19,8 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
  */
 @Configuration
 @EnableJpaRepositories(basePackages = { "org.watchdog.service" })
-@ComponentScan(basePackages = { "org.watchdog.controller", "org.watchdog.util" })
+@ComponentScan(basePackages = { "org.watchdog.controller", "org.watchdog.util",
+		"org.watchdog.boot", "com.mangofactory.swagger" })
 @EntityScan(basePackages = { "org.watchdog.domain" })
 @Import(RepositoryRestMvcConfiguration.class)
 @EnableAutoConfiguration

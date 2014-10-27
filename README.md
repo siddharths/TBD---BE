@@ -36,4 +36,9 @@ Simple. `http://localhost:8081/user/{id}`
 #### Fetch user by username.
 Very simple. `http://localhost:8081/user/un/{userNameGoesHereWithoutTheBracesObviously}`
 
+## What are the available REST endpoints?
+I can't list all of them here because who has the time to maintain that kind of documentation. I am using [Swagger](http://swagger.io/) to automatically generate documentation to list down
+ the available endpoints. All you have to do is hit [http://localhost:8081/docs/index.html](http://localhost:8081/docs/index.html). You will see a list of APIs, expand any to see the operations
+  and the models associated with them. You can even try out any operations and see the response in real time. How cool is that?! 
+
 

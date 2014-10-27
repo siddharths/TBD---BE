@@ -26,6 +26,9 @@ import org.watchdog.util.ExceptionUtil.UserNameNotFoundException;
 
 import ch.qos.logback.classic.Logger;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+
 /**
  * 
  * @author Vivek Ranjan
@@ -33,6 +36,7 @@ import ch.qos.logback.classic.Logger;
  */
 @RestController
 @RequestMapping("/user")
+@Api(value = "user", description = "User API")
 public class UserController {
 
 	private static final Logger logger = (Logger) LoggerFactory
@@ -60,7 +64,8 @@ public class UserController {
 	 *             If user id is supplied, or user name/phone number is not
 	 *             supplied.
 	 */
-	@RequestMapping(consumes = { "application/json" }, method = RequestMethod.POST)
+	@RequestMapping(consumes = { "application/json" }, method = RequestMethod.POST, value = "")
+	@ApiOperation(httpMethod = "POST", value = "Creates a new user.", consumes = "application/json", response = User.class, produces = "application/json", notes = "Creates a new user.")
 	ResponseEntity<?> create(@RequestBody User user)
 			throws PhoneNumberAlreadyExistsException,
 			UserNameAlreadyExistsException, IllegalArgumentException {
@@ -97,6 +102,7 @@ public class UserController {
 	 *             the user exists.
 	 */
 	@RequestMapping(consumes = { "application/json" }, method = RequestMethod.POST, value = "/update")
+	@ApiOperation(httpMethod = "POST", value = "Updates user.", consumes = "application/json", response = User.class, produces = "application/json", notes = "Updates user.")
 	ResponseEntity<?> update(@RequestBody User user)
 			throws UserIDNotFoundException, IllegalArgumentException {
 
@@ -129,6 +135,7 @@ public class UserController {
 	 *             If no user is found with the given phone number.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/pn/{pn}")
+	@ApiOperation(httpMethod = "GET", value = "Get user by phone number.", consumes = "application/json", response = User.class, produces = "application/json", notes = "Get user by phone number.")
 	User fetchByPhoneNumber(@PathVariable String pn)
 			throws IllegalArgumentException, PhoneNumberNotFoundException {
 		try {
@@ -155,6 +162,7 @@ public class UserController {
 	 *             If no user with the user name is found.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/un/{un}")
+	@ApiOperation(httpMethod = "GET", value = "Get user by user name.", consumes = "application/json", response = User.class, produces = "application/json", notes = "Get user by user name.")
 	User fetchByUserName(@PathVariable String un)
 			throws IllegalArgumentException, UserNameNotFoundException {
 		try {
@@ -181,6 +189,7 @@ public class UserController {
 	 *             If user id is not found.
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	@ApiOperation(httpMethod = "GET", value = "Get user by ID.", consumes = "application/json", response = User.class, produces = "application/json", notes = "Get user by ID.")
 	User fetchByUserID(@PathVariable Long id) throws IllegalArgumentException,
 			UserIDNotFoundException {
 		validateUserID(id);
